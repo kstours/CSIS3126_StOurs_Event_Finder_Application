@@ -6,9 +6,8 @@
     android:layout_height="match_parent">
 
 
-
     <TextView
-        android:id="@+id/signUp"
+        android:id="@+id/LogInText"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="50dp"
@@ -28,7 +27,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-
     <TextView
         android:id="@+id/yourEmail"
         android:layout_width="match_parent"
@@ -42,28 +40,27 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.039" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="236dp"
+        android:autofillHints="emailAddress"
         android:hint="@string/email"
+        android:inputType="textEmailAddress"
         android:textColorHint="#4e4e4e"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="emailAddress"
-        android:inputType="textEmailAddress"
 
         />
-
 
     <TextView
         android:id="@+id/yourPassword"
@@ -77,34 +74,33 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintVertical_bias="0.048" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="310dp"
+        android:layout_marginTop="344dp"
+        android:autofillHints="password"
         android:hint="@string/password"
+        android:inputType="textPassword"
         android:textColorHint="#4e4e4e"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:inputType="textPassword"
-        android:autofillHints="password" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/loginButton"
+        android:id="@+id/signInButton"
         android:layout_width="218dp"
         android:layout_height="66dp"
         android:layout_marginHorizontal="60dp"
-        android:layout_marginTop="480dp"
+        android:layout_marginTop="452dp"
         android:drawableEnd="@drawable/ic_right_arrow"
         android:paddingStart="50dp"
         android:text="@string/sign_logIn"
@@ -117,8 +113,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlSymmetry" />
-
-
 
     <TextView
         android:id="@+id/orSocial"
@@ -139,17 +133,19 @@
         app:layout_constraintVertical_bias="0.0" />
 
 
+
     <ImageView
         android:id="@+id/facebookIcon"
         android:layout_width="57dp"
         android:layout_height="51dp"
         android:layout_margin="20dp"
         android:layout_marginBottom="65dp"
-        android:contentDescription="TODO"
         android:src="@drawable/facebook"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.94"
+        android:contentDescription="TODO" />
 
     <ImageView
         android:id="@+id/googleIcon"
@@ -157,12 +153,15 @@
         android:layout_height="51dp"
         android:layout_margin="20dp"
         android:layout_marginBottom="65dp"
-        android:contentDescription="TODO"
         android:src="@drawable/google"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.725"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.942"
+        android:contentDescription="TODO" />
+
+
 
     <ImageView
         android:id="@+id/twitterIcon"
@@ -170,11 +169,22 @@
         android:layout_height="51dp"
         android:layout_margin="20dp"
         android:layout_marginBottom="65dp"
-        android:contentDescription="TODO"
         android:src="@drawable/twitter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.271"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.942"
+        android:contentDescription="TODO" />
+
+    <ImageView
+        android:id="@+id/backArrow"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="352dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_left_arrow"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="5dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

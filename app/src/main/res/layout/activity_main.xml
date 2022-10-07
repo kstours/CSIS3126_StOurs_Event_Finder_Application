@@ -62,4 +62,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.872" />
 
+    <TextView
+        android:id="@+id/Placeholder"
+        android:layout_width="242dp"
+        android:layout_height="102dp"
+        android:text="APP NAME PLACEHOLDER"
+        android:textColor="#6A994E"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.187" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

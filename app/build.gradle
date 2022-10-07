@@ -3,10 +3,14 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 
 
+
     // Add the Google services Gradle plugin
     id 'com.google.gms.google-services'
 
 }
+
+
+
 
 android {
     namespace 'com.example.csis3126_stours'
@@ -41,16 +45,18 @@ android {
 }
 
 dependencies {
+    implementation group: 'at.favre.lib', name: 'bcrypt', version: '0.9.0'
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
     implementation platform('com.google.firebase:firebase-bom:30.4.1')
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
-
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
+    implementation 'com.google.firebase:firebase-firestore:24.3.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

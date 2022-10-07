@@ -7,7 +7,9 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="facebook_app_id">768271097580342</string>
+    <string name="fb_login_protocol_scheme">fb768271097580342</string>
+    <string name="facebook_client_token">76eecdcb4f6e401a4a47e27bb984e267</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="password">Password</string>
@@ -20,4 +22,11 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="or">OR</string>
     <string name="sign_logIn">Login</string>
+    <string name="info">Information</string>
+    <string name="your_FirstName">First Name</string>
+    <string name="firstname">Firstname</string>
+    <string name="your_LastName">Last Name</string>
+    <string name="lastname">Lastname</string>
+    <string name="cont">Continue</string>
+
 </resources>

@@ -3,11 +3,7 @@ package com.example.csis3126_stours
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
-import android.widget.Button
-import android.widget.Toast
 import com.example.csis3126_stours.databinding.ActivityMainBinding
-import com.example.csis3126_stours.databinding.ActivityRegisterBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +18,10 @@ class MainActivity : AppCompatActivity() {
         binding.signUpPageButton.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
-
+        }
+        binding.signIn.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
     }
 
