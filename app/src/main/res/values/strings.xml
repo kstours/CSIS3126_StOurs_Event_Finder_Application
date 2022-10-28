@@ -28,5 +28,19 @@
     <string name="your_LastName">Last Name</string>
     <string name="lastname">Lastname</string>
     <string name="cont">Continue</string>
+    <string name="Api_Key">GoNCUA0oeHhv3SuTnHvdPN7Os</string>
+    <string name="Api_Secret">FC7dDT8tkICBlceOFnOK8d8DaIGchaOz4TIx5s6sKMJXpG4FtL</string>
+    <string name="age">Age</string>
+    <string name="zipcode">Zipcode</string>
+    <string name="selectYourInterests">Interests</string>
+    <string name="childFriendly">Child Friendly</string>
+    <string name="Continue">Continue</string>
+    <string name="outDoors">Outdoors</string>
+    <string name="free">Free</string>
+    <string name="food">Food</string>
+    <string name="selectCat">Select up to five categories that interest you!</string>
+    <string name="sports">Sports</string>
+    <string name="art">Art</string>
+    <string name="logOut">Logout</string>
 
 </resources>

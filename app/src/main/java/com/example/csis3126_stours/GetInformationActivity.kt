@@ -1,56 +1,38 @@
 package com.example.csis3126_stours
-
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.csis3126_stours.databinding.ActivityGetInformationBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
-
-class GetInformationActivity : AppCompatActivity() {
+open class GetInformationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGetInformationBinding
     private lateinit var auth: FirebaseAuth
-
-
-
-
-
-    // crashing when coming here fix this later just rough design right now problem with the xml layout probably
-
+    private lateinit var db : DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_get_information)
-        auth = FirebaseAuth.getInstance()
+        binding = ActivityGetInformationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        var auth = FirebaseAuth.getInstance()
 
+        binding.continueButton.setOnClickListener {
 
-        binding.continueButton.setOnClickListener{
-            val firstname = binding.firstname.text.toString()
-            val lastname = binding.lastname.text.toString()
-
-            if(TextUtils.isEmpty(firstname)){
-                Toast.makeText(this, "First name required", Toast.LENGTH_SHORT).show() //again toasts are going to be bad and annoying changing this later
-                return@setOnClickListener
+            if(binding.yourAge.toString().isNotEmpty()){//seems to always be not empty>
+                val i = Intent(this,InterestActivity::class.java)
+                i.putExtra("firstName",binding.yourFirstName.text.toString().trim())
+                i.putExtra("lastName",binding.yourLastName.text.toString().trim())
+                i.putExtra("age",Integer.parseInt(binding.yourAge.text.toString().trim()))
+                i.putExtra("zip",Integer.parseInt(binding.yourZipcode.text.toString().trim())) //to access across other activity
+                startActivity(i)
+            }else{
+                println("needs to fill all fields")
             }
-
-            if(TextUtils.isEmpty(lastname)){
-                Toast.makeText(this, "Last name required", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            //if these are both filled we can add to database
-            var db = FirebaseFirestore.getInstance()
-            val user: MutableMap<String, Any> = HashMap()
-            user["first"] = firstname
-            user["last"] = lastname
-            db.collection("users")
-                .add(user)
-                .addOnSuccessListener {
-                    val intent = Intent(this, HomeActivity::class.java)
-                    startActivity(intent)
-                }
         }
-    }
 }
+
+}
+
+
