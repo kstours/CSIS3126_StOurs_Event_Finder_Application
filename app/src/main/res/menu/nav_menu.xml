@@ -5,19 +5,25 @@
     <item
         android:id="@+id/ic_AddEvent"
         android:icon="@drawable/ic_addevent"
-        android:title="Add Event"
+        android:title="@string/add_event"
         >
     </item>
     <item
         android:id="@+id/ic_home"
         android:icon="@drawable/ic_home"
-        android:title="Home"
+        android:title="@string/home"
         >
     </item>
     <item
-        android:id="@+id/ic_settings"
-        android:icon="@drawable/ic_settings"
-        android:title="Settings"
+        android:id="@+id/ic_users"
+        android:icon="@drawable/ic_people"
+        android:title="@string/Users"
+        >
+    </item>
+    <item
+        android:id="@+id/ic_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/profile"
         >
     </item>
 

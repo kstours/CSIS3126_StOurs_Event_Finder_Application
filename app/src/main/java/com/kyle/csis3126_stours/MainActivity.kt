@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,14 +20,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         buttonLogin = findViewById(R.id.buttonLogin)
         textButtonSignUp = findViewById(R.id.textSignUpButton)
-        textUsername = findViewById<EditText>(R.id.editTextUsername)
-        textPassword = findViewById<EditText>(R.id.editTextPassword)
-        val auth = User.Authentication()
+        textUsername = findViewById(R.id.editTextUsername)
+        textPassword = findViewById(R.id.editTextPassword)
+
 
 
         buttonLogin.setOnClickListener{
-            auth.logIn(textUsername.text.toString(),textPassword.text.toString(),this)
 
+
+            if(textUsername.text.isEmpty()){
+                Toast.makeText(this,"Please input your Username!",Toast.LENGTH_SHORT).show()
+            }
+            if(textPassword.text.isEmpty()){
+                Toast.makeText(this,"Please input your Password!",Toast.LENGTH_SHORT).show()
+            }
+            if(textPassword.text.isNotEmpty() && textUsername.text.isNotEmpty()){
+                User.logIn(textUsername.text.toString(),textPassword.text.toString(),this)
+            }
         }
 
         textButtonSignUp.setOnClickListener {
