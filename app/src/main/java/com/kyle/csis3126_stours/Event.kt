@@ -8,6 +8,7 @@ import android.widget.Toast
 
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
+import com.kyle.csis3126_stours.User.removeAll
 import java.lang.Thread.sleep
 
 data class eventData(
@@ -189,9 +190,6 @@ object Event {
                                             eventSnapshot.ref.get().addOnSuccessListener { res ->
                                                 if (res.key == eventName) {
                                                     eventSnapshot.ref.removeValue()
-                                                    myEvents.clear()
-                                                    sleep(1500)
-                                                    getEventData()
                                                 }
                                             }
                                         }
@@ -266,6 +264,7 @@ object Event {
         context: Context,
         token: String
     ) {
+
         databaseReference = FirebaseDatabase.getInstance().getReference("Events")
         dbe = FirebaseDatabase.getInstance().getReference("Users")
         dbe.child(User.username).get().addOnSuccessListener { it ->

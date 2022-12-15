@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import com.kyle.csis3126_stours.User.removeAll
 
 class RegisterActivity : AppCompatActivity() {
     lateinit var textUsername: EditText
@@ -33,8 +34,9 @@ class RegisterActivity : AppCompatActivity() {
             ) {
                 Toast.makeText(this, "Please fill out all fields!", Toast.LENGTH_SHORT).show()
             } else {
+                val clean = textUsername.text.toString().removeAll(setOf('.','#','$','[',']'))
                 User.signUp(
-                    textUsername.text.toString(),
+                    clean,
                     textPassword.text.toString(),
                     textConfirmPassword.text.toString(),
                     this

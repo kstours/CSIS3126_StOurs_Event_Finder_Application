@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.kyle.csis3126_stours.User.removeAll
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +36,9 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please input your Password!", Toast.LENGTH_SHORT).show()
             }
             if (textPassword.text.isNotEmpty() && textUsername.text.isNotEmpty()) {
-                User.logIn(textUsername.text.toString(), textPassword.text.toString(), this)
+                val clean = textUsername.text.toString().removeAll(setOf('.','#','$','[',']'))
+
+                User.logIn(clean, textPassword.text.toString(), this)
             }
         }
 

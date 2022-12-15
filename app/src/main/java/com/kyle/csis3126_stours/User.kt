@@ -99,6 +99,7 @@ object User : Authentication() {
 
 
     fun signUp(username: String, password: String, confirmPassword: String, context: Context) {
+
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
         databaseReference.child(username).get().addOnSuccessListener {
             if (it.exists()) {//check if usernames taken
@@ -243,6 +244,8 @@ object User : Authentication() {
             }
         }
     }
-
+    fun String.removeAll(charactersToRemove: Set<Char>): String {
+        return filterNot { charactersToRemove.contains(it) }
+    }
 }
 

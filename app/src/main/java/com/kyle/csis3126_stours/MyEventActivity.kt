@@ -38,9 +38,3 @@ class MyEventActivity : AppCompatActivity() {
         recycler.adapter = eventAdapter3(Event.myEvents, this)
     }
 }
-
-
-
-
-
-

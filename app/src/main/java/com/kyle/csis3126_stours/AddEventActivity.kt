@@ -21,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.firebase.storage.FirebaseStorage
+import com.kyle.csis3126_stours.User.removeAll
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -147,8 +148,10 @@ class AddEventActivity : AppCompatActivity() {
                 list.add("0")
 
                 uploadImage()
+                val clean = textEventName.text.toString().removeAll(setOf('.','#','$','[',']'))
+
                 Event.createEvent(
-                    textEventName.text.toString(),
+                    clean,
                     textEventDescription.text.toString(),
                     textDate.text.toString(),
                     User.username, state, list, tags, textAddress.text.toString(), this, User.token

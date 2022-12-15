@@ -33,17 +33,17 @@ class eventAdapter3(private val eventList: ArrayList<eventData>, private val ctx
 
         val storageRef = FirebaseStorage.getInstance()
             .getReference("images/events/${currentItem.name}+${currentItem.author}").downloadUrl.addOnSuccessListener {
-            Picasso.get().load(it.toString()).into(holder.eventPicture)
-            val temp = it.toString()
-            holder.eventName.text = currentItem.name
-            holder.buttonDelete.setOnClickListener {
-                currentItem.name?.let { it1 -> Event.deleteEvent(User.username, User.token, it1) }
-                val intent = Intent(ctx, ProfileActivity::class.java)
-                Event.otherPeoplesEvents.clear()
+                Picasso.get().load(it.toString()).into(holder.eventPicture)
+                val temp = it.toString()
+                holder.eventName.text = currentItem.name
+                holder.buttonDelete.setOnClickListener {
+                    currentItem.name?.let { it1 -> Event.deleteEvent(User.username, User.token, it1) }
+                    val intent = Intent(ctx, ProfileActivity::class.java)
+                    Event.otherPeoplesEvents.clear()
 
-                ctx.startActivity(intent)
+                    ctx.startActivity(intent)
+                }
             }
-        }
     }
 
     override fun getItemCount(): Int {
