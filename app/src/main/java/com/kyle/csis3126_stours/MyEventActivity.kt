@@ -22,21 +22,21 @@ class MyEventActivity : AppCompatActivity() {
 
 
         display()
-        back.setOnClickListener{
-         val intent = Intent(this,ProfileActivity::class.java)
-         finish()
-         startActivity(intent)
-         }
+        back.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
 
 
-}
+    }
 
 
-private fun display(){
-    recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
-    recycler.setHasFixedSize(true)
-    recycler.adapter = eventAdapter3(Event.myEvents,this)
-}
+    private fun display() {
+        recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recycler.setHasFixedSize(true)
+        recycler.adapter = eventAdapter3(Event.myEvents, this)
+    }
 }
 
 

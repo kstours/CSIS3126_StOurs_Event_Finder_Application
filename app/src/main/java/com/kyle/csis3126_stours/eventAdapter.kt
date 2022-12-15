@@ -11,37 +11,39 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 
-class eventAdapter(private val eventList:ArrayList<eventData>, private val ctx:Context) : RecyclerView.Adapter<eventAdapter.MyViewHolder>(){
+class eventAdapter(private val eventList: ArrayList<eventData>, private val ctx: Context) :
+    RecyclerView.Adapter<eventAdapter.MyViewHolder>() {
 
-    class MyViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView){
-        val eventName : TextView = itemView.findViewById(R.id.textEventName)
-        val eventPicture : ImageView = itemView.findViewById(R.id.imageEventPic)
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val eventName: TextView = itemView.findViewById(R.id.textEventName)
+        val eventPicture: ImageView = itemView.findViewById(R.id.imageEventPic)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item,parent,false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
         return MyViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = eventList[position]
-        val storageRef = FirebaseStorage.getInstance().getReference("images/events/${currentItem.name}+${currentItem.author}").downloadUrl.addOnSuccessListener {
+        val storageRef = FirebaseStorage.getInstance()
+            .getReference("images/events/${currentItem.name}+${currentItem.author}").downloadUrl.addOnSuccessListener {
             Picasso.get().load(it.toString()).into(holder.eventPicture)
             val temp = it.toString()
             holder.eventName.text = currentItem.name
-            holder.itemView.setOnClickListener{
-                val intent = Intent(ctx,ExtendedEventActivity::class.java)
-                intent.putExtra("gobackto","")
-
-                intent.putExtra("name",currentItem.name)
-                intent.putExtra("desc",currentItem.description)
-                intent.putExtra("data",currentItem.date)
-                intent.putExtra("author",currentItem.author)
-                intent.putExtra("state",currentItem.state)
-                intent.putExtra("attending",currentItem.attending)
-                intent.putExtra("tags",currentItem.interests)
-                intent.putExtra("addr",currentItem.addr)
-                intent.putExtra("image",temp)
+            holder.itemView.setOnClickListener {
+                val intent = Intent(ctx, ExtendedEventActivity::class.java)
+                intent.putExtra("gobackto", "")
+                intent.putExtra("name", currentItem.name)
+                intent.putExtra("desc", currentItem.description)
+                intent.putExtra("data", currentItem.date)
+                intent.putExtra("author", currentItem.author)
+                intent.putExtra("state", currentItem.state)
+                intent.putExtra("attending", currentItem.attending)
+                intent.putExtra("tags", currentItem.interests)
+                intent.putExtra("addr", currentItem.addr)
+                intent.putExtra("image", temp)
                 println("Clicked event ${currentItem.name}")
                 ctx.startActivity(intent)
             }
@@ -50,5 +52,5 @@ class eventAdapter(private val eventList:ArrayList<eventData>, private val ctx:C
 
     override fun getItemCount(): Int {
         return eventList.size
-        }
+    }
 }

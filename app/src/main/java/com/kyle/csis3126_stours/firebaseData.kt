@@ -9,13 +9,10 @@ object firebaseData {
         private set
 
 
-
-
-
     fun getAllUsers() { //this seems to be called twice somew
-        if (userList.isNotEmpty()){
+        if (userList.isNotEmpty()) {
             userList.clear()
-        }else{
+        } else {
             databaseReference = FirebaseDatabase.getInstance().getReference("Users")
             databaseReference.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -27,13 +24,13 @@ object firebaseData {
 
                     }
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
         }
 
     }
-
 
 
 }

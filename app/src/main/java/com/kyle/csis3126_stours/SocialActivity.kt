@@ -13,7 +13,7 @@ import kotlin.collections.ArrayList
 class SocialActivity : AppCompatActivity() {
     lateinit var bottomNav: BottomNavigationView
     lateinit var search: SearchView
-    lateinit var recycler:RecyclerView
+    lateinit var recycler: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_social)
@@ -23,10 +23,9 @@ class SocialActivity : AppCompatActivity() {
         bottomNav = findViewById(R.id.bottom_nav)
         bottomNav.selectedItemId = R.id.ic_users;
         display()
-        Event.refreshEvents()
 
 
-        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null) {
                     filter(newText)
@@ -42,8 +41,10 @@ class SocialActivity : AppCompatActivity() {
         })
 
         bottomNav.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.ic_profile-> {
+            when (it.itemId) {
+                R.id.ic_profile -> {
+                    Event.refreshEvents()
+
                     val intent = Intent(this, ProfileActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
@@ -52,7 +53,9 @@ class SocialActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
-                R.id.ic_AddEvent->{
+                R.id.ic_AddEvent -> {
+                    Event.refreshEvents()
+
                     val intent = Intent(this, AddEventActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
@@ -62,7 +65,9 @@ class SocialActivity : AppCompatActivity() {
                 }
 
 
-                R.id.ic_home-> {
+                R.id.ic_home -> {
+                    Event.refreshEvents()
+
                     val intent = Intent(this, HomeActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
@@ -76,35 +81,35 @@ class SocialActivity : AppCompatActivity() {
         }
     }
 
-    private fun filter(string:String){
+    private fun filter(string: String) {
         var array: ArrayList<String> = ArrayList<String>()
         array = firebaseData.userList.distinct().toList() as ArrayList<String>
-        val filtered:ArrayList<String> =  ArrayList<String>()
+        val filtered: ArrayList<String> = ArrayList<String>()
 
-        if(string != null){
-            for (i in array){
-                if (i.toString().toLowerCase(Locale.ROOT).contains(string)){
+        if (string != null) {
+            for (i in array) {
+                if (i.toString().toLowerCase(Locale.ROOT).contains(string)) {
                     filtered.add(i)
                 }
             }
         }
-        if (filtered.isEmpty()){
+        if (filtered.isEmpty()) {
             display()
-        }else{
-            recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        } else {
+            recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             recycler.setHasFixedSize(true)
-            recycler.adapter = SocialAdapter(filtered,this)
+            recycler.adapter = SocialAdapter(filtered, this)
         }
     }
 
-    private fun display(){
+    private fun display() {
         var array: ArrayList<String> = ArrayList<String>()
         array = firebaseData.userList.distinct().toList() as ArrayList<String>
-        if(array.contains(User.username)){
+        if (array.contains(User.username)) {
             array.remove(User.username)
         }
-        recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.setHasFixedSize(true)
-        recycler.adapter = SocialAdapter(array,this)
+        recycler.adapter = SocialAdapter(array, this)
     }
 }

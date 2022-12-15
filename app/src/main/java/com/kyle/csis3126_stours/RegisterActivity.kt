@@ -12,8 +12,8 @@ class RegisterActivity : AppCompatActivity() {
     lateinit var textUsername: EditText
     lateinit var textPassword: EditText
     lateinit var textConfirmPassword: EditText
-    lateinit var buttonSignup:Button
-    lateinit var back:ImageView
+    lateinit var buttonSignup: Button
+    lateinit var back: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -24,14 +24,21 @@ class RegisterActivity : AppCompatActivity() {
         buttonSignup = findViewById(R.id.buttonSignUp)
 
 
-        back.setOnClickListener{
+        back.setOnClickListener {
             finish()
         }
-        buttonSignup.setOnClickListener{
-            if(textUsername.text.toString().isEmpty() || textPassword.text.toString().isEmpty() || textConfirmPassword.text.toString().isEmpty()){
-                Toast.makeText(this,"Please fill out all fields!",Toast.LENGTH_SHORT).show()
-            }else{
-                User.signUp(textUsername.text.toString(),textPassword.text.toString(),textConfirmPassword.text.toString(),this)
+        buttonSignup.setOnClickListener {
+            if (textUsername.text.toString().isEmpty() || textPassword.text.toString()
+                    .isEmpty() || textConfirmPassword.text.toString().isEmpty()
+            ) {
+                Toast.makeText(this, "Please fill out all fields!", Toast.LENGTH_SHORT).show()
+            } else {
+                User.signUp(
+                    textUsername.text.toString(),
+                    textPassword.text.toString(),
+                    textConfirmPassword.text.toString(),
+                    this
+                )
             }
         }
 

@@ -25,17 +25,17 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        buttonLogin.setOnClickListener{
+        buttonLogin.setOnClickListener {
 
 
-            if(textUsername.text.isEmpty()){
-                Toast.makeText(this,"Please input your Username!",Toast.LENGTH_SHORT).show()
+            if (textUsername.text.isEmpty()) {
+                Toast.makeText(this, "Please input your Username!", Toast.LENGTH_SHORT).show()
             }
-            if(textPassword.text.isEmpty()){
-                Toast.makeText(this,"Please input your Password!",Toast.LENGTH_SHORT).show()
+            if (textPassword.text.isEmpty()) {
+                Toast.makeText(this, "Please input your Password!", Toast.LENGTH_SHORT).show()
             }
-            if(textPassword.text.isNotEmpty() && textUsername.text.isNotEmpty()){
-                User.logIn(textUsername.text.toString(),textPassword.text.toString(),this)
+            if (textPassword.text.isNotEmpty() && textUsername.text.isNotEmpty()) {
+                User.logIn(textUsername.text.toString(), textPassword.text.toString(), this)
             }
         }
 

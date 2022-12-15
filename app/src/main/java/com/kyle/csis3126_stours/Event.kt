@@ -20,6 +20,7 @@ data class eventData(
     var attending: ArrayList<String>,
     var interests: ArrayList<String>? = null
 )
+
 private lateinit var databaseReference: DatabaseReference
 private lateinit var dbe: DatabaseReference
 
@@ -38,7 +39,7 @@ object Event {
     var otherPeoplesEvents: ArrayList<eventData> = ArrayList<eventData>()
 
 
-    fun sortTheirEvents(username:String) {
+    fun sortTheirEvents(username: String) {
         if (allEvents.isNotEmpty() && otherPeoplesEvents.isEmpty()) {
             for (events in allEvents) {
                 if (events.author == username) {
@@ -46,19 +47,19 @@ object Event {
                     otherPeoplesEvents.add(events)
                 }
             }
-            }else if (allEvents.isNotEmpty()){
-                otherPeoplesEvents.clear()
-                for (events in allEvents) {
+        } else if (allEvents.isNotEmpty()) {
+            otherPeoplesEvents.clear()
+            for (events in allEvents) {
                 if (events.author == username) {
                     println("adding")
                     otherPeoplesEvents.add(events)
                 }
             }
         }
-        }
+    }
 
 
-    fun refreshEvents(){
+    fun refreshEvents() {
         allEvents.clear()
         nearEvents.clear()
         allOutdoor.clear()
@@ -185,9 +186,8 @@ object Event {
                                 override fun onDataChange(snapshot: DataSnapshot) {
                                     if (snapshot.exists()) {
                                         for (eventSnapshot in snapshot.children) {
-                                            eventSnapshot.ref.get().addOnSuccessListener {
-                                                res->
-                                                if(res.key == eventName){
+                                            eventSnapshot.ref.get().addOnSuccessListener { res ->
+                                                if (res.key == eventName) {
                                                     eventSnapshot.ref.removeValue()
                                                     myEvents.clear()
                                                     sleep(1500)
@@ -210,93 +210,107 @@ object Event {
         }
 
 
-
     }
-
 
 
     fun getEventData() {
-            if(allEvents.isNotEmpty()){ // prevents it writing twice
-                allEvents.clear()
-            }else{
-                databaseReference = FirebaseDatabase.getInstance().getReference("Events")
-                databaseReference.addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.exists()) {
-                            for (eventSnapshot in snapshot.children) {
-                                var attending = eventSnapshot.child("attending").getValue<ArrayList<String>>()!!
-                                var interests = eventSnapshot.child("interests").getValue<ArrayList<String>>()!!
-                                val eventData = eventData(
-                                    eventSnapshot.child("author").value.toString(),
-                                    eventSnapshot.child("name").value.toString(),
-                                    eventSnapshot.child("description").value.toString(),
-                                    eventSnapshot.child("date").value.toString(),
-                                    eventSnapshot.child("state").value.toString(),
-                                    eventSnapshot.child("addr").value.toString(),
-                                    attending,
-                                    interests
-                                )
-                                allEvents.add(eventData)
-                                println(eventData)
-                            }
-
-                            sortEvents()
+        if (allEvents.isNotEmpty()) { // prevents it writing twice
+            allEvents.clear()
+        } else {
+            databaseReference = FirebaseDatabase.getInstance().getReference("Events")
+            databaseReference.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        for (eventSnapshot in snapshot.children) {
+                            var attending =
+                                eventSnapshot.child("attending").getValue<ArrayList<String>>()!!
+                            var interests =
+                                eventSnapshot.child("interests").getValue<ArrayList<String>>()!!
+                            val eventData = eventData(
+                                eventSnapshot.child("author").value.toString(),
+                                eventSnapshot.child("name").value.toString(),
+                                eventSnapshot.child("description").value.toString(),
+                                eventSnapshot.child("date").value.toString(),
+                                eventSnapshot.child("state").value.toString(),
+                                eventSnapshot.child("addr").value.toString(),
+                                attending,
+                                interests
+                            )
+                            allEvents.add(eventData)
+                            println(eventData)
                         }
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
-                })
-            }
 
+                        sortEvents()
+                    }
+                }
 
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
         }
 
 
+    }
 
-        fun createEvent(
-            name: String,
-            description: String,
-            date: String,
-            author: String,
-            state:String,
-            attending: ArrayList<String>,
-            tags: ArrayList<String>,
-            addr: String,
-            context: Context,
-            token:String
-        ) {
-            databaseReference = FirebaseDatabase.getInstance().getReference("Events")
-            dbe = FirebaseDatabase.getInstance().getReference("Users")
-            dbe.child(User.username).get().addOnSuccessListener { it ->
-                if (it.exists()) {
-                    dbe.child(User.username).child("token").get().addOnSuccessListener {
-                        if (it.exists()) {
-                            if(it.value.toString() == token){
-                                databaseReference.child(name).get().addOnSuccessListener {
-                                    if (it.exists()) {
-                                        Toast.makeText(context, "Event name is already taken", Toast.LENGTH_SHORT)
-                                            .show()
-                                    } else {
-                                        val eventData = eventData(author, name, description, date,state,addr,attending,tags)
-                                        databaseReference.child(name).setValue(eventData)
-                                        println(state)
-                                        Toast.makeText(context, "Event Created!", Toast.LENGTH_SHORT).show()
-                                        val intent = Intent(context, HomeActivity::class.java)
-                                        intent.putExtra(
-                                            author,
-                                            "Username"
-                                        ) //store username that way i can access data later
-                                        myEvents.add(eventData)
-                                        context.startActivity(intent)
-                                    }
+
+    fun createEvent(
+        name: String,
+        description: String,
+        date: String,
+        author: String,
+        state: String,
+        attending: ArrayList<String>,
+        tags: ArrayList<String>,
+        addr: String,
+        context: Context,
+        token: String
+    ) {
+        databaseReference = FirebaseDatabase.getInstance().getReference("Events")
+        dbe = FirebaseDatabase.getInstance().getReference("Users")
+        dbe.child(User.username).get().addOnSuccessListener { it ->
+            if (it.exists()) {
+                dbe.child(User.username).child("token").get().addOnSuccessListener {
+                    if (it.exists()) {
+                        if (it.value.toString() == token) {
+                            databaseReference.child(name).get().addOnSuccessListener {
+                                if (it.exists()) {
+                                    Toast.makeText(
+                                        context,
+                                        "Event name is already taken",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                } else {
+                                    val eventData = eventData(
+                                        author,
+                                        name,
+                                        description,
+                                        date,
+                                        state,
+                                        addr,
+                                        attending,
+                                        tags
+                                    )
+                                    databaseReference.child(name).setValue(eventData)
+                                    println(state)
+                                    Toast.makeText(context, "Event Created!", Toast.LENGTH_SHORT)
+                                        .show()
+                                    val intent = Intent(context, HomeActivity::class.java)
+                                    intent.putExtra(
+                                        author,
+                                        "Username"
+                                    ) //store username that way i can access data later
+                                    myEvents.add(eventData)
+                                    context.startActivity(intent)
                                 }
                             }
-                            }else{
-                                println("Failed to verify token.")
-                            }
                         }
+                    } else {
+                        println("Failed to verify token.")
                     }
                 }
             }
+        }
     }
+}

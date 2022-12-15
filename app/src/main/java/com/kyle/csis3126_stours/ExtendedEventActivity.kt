@@ -13,15 +13,15 @@ import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 
 class ExtendedEventActivity : AppCompatActivity() {
-    private lateinit var eventPic:ImageView
-    private lateinit var eventName:TextView
-    private lateinit var eventDesc:TextView
-    private lateinit var eventAddr:TextView
-    private lateinit var count:TextView
-    private lateinit var eventState:TextView
-    private lateinit var back:ImageView
-    private lateinit var buttonAttending:Button
-    private lateinit var dateT:TextView
+    private lateinit var eventPic: ImageView
+    private lateinit var eventName: TextView
+    private lateinit var eventDesc: TextView
+    private lateinit var eventAddr: TextView
+    private lateinit var count: TextView
+    private lateinit var eventState: TextView
+    private lateinit var back: ImageView
+    private lateinit var buttonAttending: Button
+    private lateinit var dateT: TextView
     private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,7 @@ class ExtendedEventActivity : AppCompatActivity() {
         setContentView(R.layout.activity_extended_event)
         back = findViewById(R.id.imageBack)
         count = findViewById(R.id.textCount)
-        eventPic= findViewById(R.id.imageEventImage)
+        eventPic = findViewById(R.id.imageEventImage)
         eventName = findViewById(R.id.textEventNameEX)
         eventDesc = findViewById(R.id.textEventDescEX)
         buttonAttending = findViewById(R.id.buttonRsvp)
@@ -49,49 +49,47 @@ class ExtendedEventActivity : AppCompatActivity() {
         eventState.text = state
         dateT.text = date
 
-        var attending:ArrayList<String> = intent.getStringArrayListExtra("attending") as ArrayList<String>
+        var attending: ArrayList<String> =
+            intent.getStringArrayListExtra("attending") as ArrayList<String>
 
 
-        if(attending.contains(User.username)){
+        if (attending.contains(User.username)) {
             buttonAttending.text = "UNATTEND"
         }
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Events")
-        databaseReference.child(name.toString()).child("attending").get().addOnSuccessListener{
-            count.text = (it.childrenCount.toInt()-1).toString()
+        databaseReference.child(name.toString()).child("attending").get().addOnSuccessListener {
+            count.text = (it.childrenCount.toInt() - 1).toString()
         }
 
 
 
 
-        back.setOnClickListener{
+        back.setOnClickListener {
 
 
-           finish()
-
+            finish()
 
 
         }
 
         buttonAttending.setOnClickListener {
-            FirebaseStorage.getInstance().getReference("images/users/${User.username}ProfilePic").downloadUrl.addOnSuccessListener {
-                databaseReference.child(name.toString()).child("attending").get().addOnSuccessListener{
-                    if (name != null) {
-                        Event.rsvpToEvent(name,User.username,buttonAttending,User.token,count)
+            FirebaseStorage.getInstance()
+                .getReference("images/users/${User.username}ProfilePic").downloadUrl.addOnSuccessListener {
+                databaseReference.child(name.toString()).child("attending").get()
+                    .addOnSuccessListener {
+                        if (name != null) {
+                            Event.rsvpToEvent(
+                                name,
+                                User.username,
+                                buttonAttending,
+                                User.token,
+                                count
+                            )
+                        }
                     }
-                }
             }
         }
-
-
-
-
-
-
-
-
-
-
 
 
     }

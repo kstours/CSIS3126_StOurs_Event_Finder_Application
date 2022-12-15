@@ -21,7 +21,7 @@ class TheirEventsActivity : AppCompatActivity() {
 
 
         display()
-        back.setOnClickListener{
+        back.setOnClickListener {
             finish()
         }
 
@@ -29,10 +29,10 @@ class TheirEventsActivity : AppCompatActivity() {
     }
 
 
-    private fun display(){
-        recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+    private fun display() {
+        recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.setHasFixedSize(true)
-        recycler.adapter = eventAdapter4(Event.otherPeoplesEvents,this)
+        recycler.adapter = eventAdapter4(Event.otherPeoplesEvents, this)
     }
 }
 

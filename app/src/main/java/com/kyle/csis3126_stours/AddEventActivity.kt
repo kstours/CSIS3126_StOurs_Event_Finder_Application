@@ -56,12 +56,11 @@ class AddEventActivity : AppCompatActivity() {
         imageEvent = findViewById(R.id.imageEvent)
         buttonAddEvent = findViewById(R.id.buttonAddEvent)
         chipGroup = findViewById(R.id.chipGroupInterests)
-        Event.refreshEvents()
 
         bottomNav.selectedItemId = R.id.ic_AddEvent;
         val items = resources.getStringArray(R.array.states)
-        var errors: HashMap<String, String> = HashMap<String, String>()
-        var state :String = ""
+        var errors: ArrayList<String> = ArrayList<String>()
+        var state: String = ""
         val spinnerAdapter =
             object : ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items) {
 
@@ -92,9 +91,10 @@ class AddEventActivity : AppCompatActivity() {
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                errors["State"] = "Please select a state"
+                errors.add("Please select a state")
 
             }
+
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -122,35 +122,49 @@ class AddEventActivity : AppCompatActivity() {
                 tags.add(chip.text.toString())
             }
             if (!::photo.isInitialized) {
-                errors["ProfilePic"] = "Please Upload a picture"
+                errors.add("Please Upload a picture")
             }
             if (tags.isEmpty()) {
-                errors["Tags"] = "Please select At least One Tag!"
+                errors.add("Please select At least One Tag!")
             }
 
             if (textEventName.text.isEmpty()) {
-                errors["FirstName"] = "Please enter a valid First Name"
+                errors.add("Please enter event name")
             }
             if (textEventDescription.text.isEmpty()) {
-                errors["LastName"] = "Please enter a valid Last Name"
+                errors.add("Enter a description")
             }
+            if (textAddress.text.isEmpty()) {
+                errors.add("Enter an address")
 
+            }
+            if (textDate.text.isEmpty()) {
+                errors.add("Enter a date")
+
+            }
             if (errors.isEmpty() && state != "") {
                 val list: ArrayList<String> = ArrayList<String>()
                 list.add("0")
+
                 uploadImage()
                 Event.createEvent(
                     textEventName.text.toString(),
                     textEventDescription.text.toString(),
                     textDate.text.toString(),
-                    User.username,state, list ,tags, textAddress.text.toString(),this, User.token
+                    User.username, state, list, tags, textAddress.text.toString(), this, User.token
                 )
 
-                finish()
             } else {
-                println(errors)
+                for (e in errors) {
+                    Toast.makeText(this, e, Toast.LENGTH_SHORT).show()
+                }
+                if (state == "") {
+                    Toast.makeText(this, "Select your state", Toast.LENGTH_SHORT).show()
+
+                }
             }
             errors.clear()
+            Event.refreshEvents()
         }
 
 
@@ -197,16 +211,16 @@ class AddEventActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
 
-        buttonGetImage.setOnClickListener{
+        buttonGetImage.setOnClickListener {
 
             selectImage()
         }
 
 
         bottomNav.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.ic_profile-> {
-                    finish()
+            when (it.itemId) {
+                R.id.ic_profile -> {
+                    Event.refreshEvents()
 
                     val intent = Intent(this, ProfileActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -214,8 +228,8 @@ class AddEventActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
-                R.id.ic_users->{
-                    finish()
+                R.id.ic_users -> {
+                    Event.refreshEvents()
 
                     val intent = Intent(this, SocialActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -224,8 +238,9 @@ class AddEventActivity : AppCompatActivity() {
                 }
 
 
-                R.id.ic_home-> {
-                    finish()
+                R.id.ic_home -> {
+                    Event.refreshEvents()
+
 
                     val intent = Intent(this, HomeActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -239,21 +254,29 @@ class AddEventActivity : AppCompatActivity() {
     }
 
 
-    private fun uploadImage(){
-        val storageRef = FirebaseStorage.getInstance().getReference("images/events/${textEventName.text}+${User.username}")
+    private fun uploadImage() {
+        val storageRef = FirebaseStorage.getInstance()
+            .getReference("images/events/${textEventName.text}+${User.username}")
         storageRef.putFile(photo).addOnSuccessListener {
 
         }
     }
 
 
-    private fun selectImage(){
-        if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-            1)
-        }else{
-            val galleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(galleryIntent,2)
+    private fun selectImage() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+                1
+            )
+        } else {
+            val galleryIntent =
+                Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(galleryIntent, 2)
         }
     }
 
@@ -262,23 +285,24 @@ class AddEventActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            val galleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(galleryIntent,2)
+        if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            val galleryIntent =
+                Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(galleryIntent, 2)
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 2 && resultCode == Activity.RESULT_OK && data != null){
+        if (requestCode == 2 && resultCode == Activity.RESULT_OK && data != null) {
             photo = data.data!!
 
-            if(Build.VERSION.SDK_INT >= 28){
+            if (Build.VERSION.SDK_INT >= 28) {
                 val source = ImageDecoder.createSource(this.contentResolver, photo)
                 bitmap = ImageDecoder.decodeBitmap(source)
                 imageEvent.setImageBitmap(bitmap)
-            }else{
-                bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver,photo)
+            } else {
+                bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, photo)
                 imageEvent.setImageBitmap(bitmap)
 
             }

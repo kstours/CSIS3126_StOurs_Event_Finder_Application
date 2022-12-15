@@ -14,7 +14,7 @@ class ChangePwActivity : AppCompatActivity() {
     lateinit var textCPassword: EditText
     lateinit var textConfirmPassword: EditText
     lateinit var buttonSignup: Button
-    lateinit var back:ImageView
+    lateinit var back: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_pw)
@@ -28,15 +28,20 @@ class ChangePwActivity : AppCompatActivity() {
 
 
 
-        back.setOnClickListener{
+        back.setOnClickListener {
             finish()
         }
 
         buttonSignup.setOnClickListener {
-            User.changePassword(User.username,textCPassword.text.toString(),textNewPW.text.toString(),textConfirmPassword.text.toString(),User.token,this)
+            User.changePassword(
+                User.username,
+                textCPassword.text.toString(),
+                textNewPW.text.toString(),
+                textConfirmPassword.text.toString(),
+                User.token,
+                this
+            )
         }
-
-
 
 
     }
