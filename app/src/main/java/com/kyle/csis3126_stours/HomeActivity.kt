@@ -42,7 +42,7 @@ class HomeActivity : AppCompatActivity() {
         text6 = findViewById(R.id.text6)
         text7 = findViewById(R.id.text7)
 
-        display()
+        displayOnScreen()
 
 
         println(Event.nearEvents)
@@ -98,7 +98,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-    private fun display() { //this is disgusting but it works.
+    private fun displayOnScreen() { //this is disgusting but it works.
         displayNear()
         val interests = User.interests
         var interestList: ArrayList<String> = ArrayList<String>()
@@ -219,102 +219,6 @@ class HomeActivity : AppCompatActivity() {
             }
 
 
-            for (i in 0..6) {
-                if (interestList.size == 6) {
-                    if (i == 0) {
-                        text7.text = interestList[i]
-                        display(recyclerView7, interestList[i])
-                    }
-                    if (i == 1) {
-                        text6.text = interests[i]
-                        display(recyclerView6, interestList[i])
-                    }
-                    if (i == 2) {
-                        text5.text = interestList[i]
-                        display(recyclerView5, interestList[i])
-                    }
-                    if (i == 3) {
-                        text4.text = interestList[i]
-                        display(recyclerView4, interestList[i])
-                    }
-                    if (i == 4) {
-                        text3.text = interestList[i]
-                        display(recyclerView3, interestList[i])
-                    }
-                    if (i == 5) {
-                        text2.text = interestList[i]
-                        display(recyclerView2, interestList[i])
-                    }
-                } else if (interestList.size == 5) {
-                    if (i == 0) {
-                        text7.text = interestList[i]
-                        display(recyclerView7, interestList[i])
-                    }
-                    if (i == 1) {
-                        text6.text = interestList[i]
-                        display(recyclerView6, interestList[i])
-                    }
-                    if (i == 2) {
-                        text5.text = interestList[i]
-                        display(recyclerView5, interestList[i])
-                    }
-                    if (i == 3) {
-                        text4.text = interestList[i]
-                        display(recyclerView4, interestList[i])
-                    }
-                    if (i == 4) {
-                        text3.text = interestList[i]
-                        display(recyclerView3, interestList[i])
-                    }
-                } else if (interestList.size == 4) {
-                    if (i == 0) {
-                        text7.text = interestList[i]
-                        display(recyclerView7, interestList[i])
-                    }
-                    if (i == 1) {
-                        text6.text = interestList[i]
-                        display(recyclerView6, interestList[i])
-                    }
-                    if (i == 2) {
-                        text5.text = interestList[i]
-                        display(recyclerView5, interestList[i])
-                    }
-                    if (i == 3) {
-                        text4.text = interestList[i]
-                        display(recyclerView4, interestList[i])
-                    }
-
-                } else if (interestList.size == 3) {
-                    if (i == 0) {
-                        text7.text = interestList[i]
-                        display(recyclerView7, interestList[i])
-                    }
-                    if (i == 1) {
-                        text6.text = interestList[i]
-                        display(recyclerView6, interestList[i])
-                    }
-                    if (i == 2) {
-                        text5.text = interestList[i]
-                        display(recyclerView5, interestList[i])
-                    }
-                } else if (interestList.size == 2) {
-                    if (i == 0) {
-                        text7.text = interestList[i]
-                        display(recyclerView7, interestList[i])
-                    }
-                    if (i == 1) {
-                        text6.text = interestList[i]
-                        display(recyclerView6, interestList[i])
-                    }
-
-                } else if (interestList.size == 1) {
-                    if (i == 0) {
-                        text7.text = interestList[i]
-                        display(recyclerView7, interestList[i])
-                    }
-
-                }
-            }
 
 
         }

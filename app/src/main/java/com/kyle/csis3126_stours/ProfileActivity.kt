@@ -29,6 +29,7 @@ class ProfileActivity : AppCompatActivity() {
             "Manage my events",
             "Change password",
             "Change profile picture",
+            "Change Information",
             "Logout"
         )
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values)
@@ -64,6 +65,12 @@ class ProfileActivity : AppCompatActivity() {
 
             }
             if (i == 4) {
+
+                val intent = Intent(this, ChangeInterestsActivity::class.java)
+                startActivity(intent)
+
+            }
+            if (i == 5) {
 
                 User.logOut(User.token, User.username, this)
 

@@ -54,7 +54,6 @@
                     android:layout_height="43dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="@string/outdoors"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:visibility="visible" />
 
@@ -70,7 +69,6 @@
                     android:layout_height="43dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="@string/concerts"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:visibility="visible" />
 
@@ -86,7 +84,6 @@
                     android:layout_height="43dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="@string/sports"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:visibility="visible" />
 
@@ -102,7 +99,6 @@
                     android:layout_height="43dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="@string/food"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:visibility="visible" />
 
@@ -118,7 +114,6 @@
                     android:layout_height="43dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="@string/kid_friendly"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:visibility="visible" />
 
@@ -134,7 +129,6 @@
                     android:layout_height="43dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="@string/business"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:visibility="visible" />
 

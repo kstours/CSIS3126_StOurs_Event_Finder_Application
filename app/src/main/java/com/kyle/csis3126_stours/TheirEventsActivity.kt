@@ -18,8 +18,6 @@ class TheirEventsActivity : AppCompatActivity() {
         back = findViewById(R.id.imageBack4)
 
 
-
-
         display()
         back.setOnClickListener {
             finish()
