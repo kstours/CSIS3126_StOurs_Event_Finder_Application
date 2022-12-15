@@ -211,12 +211,11 @@ object User : Authentication() {
                             User.username =
                                 username //store username that way i can access data later
                             val intent = Intent(context, HomeActivity::class.java)
-                            Event.getEventData()
+                            Event.refreshEvents()
                             information = dataSnapshot.child("information")
                                 .getValue<HashMap<String, String>>()!!
                             interests =
                                 dataSnapshot.child("interests").getValue<ArrayList<String>>()!!
-                            Event.refreshEvents()
                             context.startActivity(intent) //if its right  login
                         } else {
                             Toast.makeText(context, "Invalid password!", Toast.LENGTH_SHORT).show()

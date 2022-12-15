@@ -75,7 +75,7 @@ object Event {
         otherPeoplesEvents.clear()
 
         getEventData()
-        sleep(100)
+        sleep(200)
         sortEvents()
     }
 
