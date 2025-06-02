@@ -26,7 +26,7 @@ This project was developed as part of a school assignment and is primarily a dem
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/eventfinder.git
+   git clone https://github.com/kstours/eventfinder.git
 2. Open the project in Android Studio
 
 3. Add your google-services.json file in the /app directory (Do not commit this file to version control)
