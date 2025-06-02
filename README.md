@@ -1,4 +1,4 @@
-# EventFinder
+# Event Finder
 
 A mobile application that allows users to discover, share, and RSVP to local events based on their interests. Built in Kotlin using Android Studio, EventFinder connects users through real-time event updates and attendance tracking.
 
